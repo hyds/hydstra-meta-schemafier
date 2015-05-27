@@ -1,0 +1,22 @@
+[
+  {
+      "orgcode":"nrm",
+      "tables":["site","samples","results"],
+       "state":"qld",
+      "decode":true,
+      "world_agency":"Queensland State Government Department of Natural Resource and Mines",
+      "country":"aus",
+      "system":"hydstra",
+      "bounds":{
+          "west":137.845459,
+          "south":-29.340284,
+          "east":153.863525,
+          "north":-9.726654
+      },
+      "options":{
+          "host":"watermonitoring.dnrm.qld.gov.au",
+          "path":"/cgi/webservice.server.pl?",
+          "method":"GET"
+      }
+  }
+]
