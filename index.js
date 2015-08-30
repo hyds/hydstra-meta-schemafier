@@ -13,6 +13,26 @@ reqDomain = domain.create();
 var bunyan = require('bunyan');
 var log = bunyan.createLogger({name: "hydstra-meta-schemafier"});
 
+//leveldb
+/*
+
+var levelup = require('levelup')
+var db = levelup('./db/companydb')
+
+  var chunk = obj[i];
+  
+  for (objKey in chunk){
+      if (!chunk.hasOwnProperty(objKey)){ continue; }
+
+    db.put(objKey,chunk[objKey], function (err) {
+      if (err) return console.log('Ooops!', err) // some kind of I/O error
+      console.log('hello world')
+    })
+  }
+
+
+*/
+
 
 
 //custom modules
@@ -20,8 +40,6 @@ var hydstraTools = require('hds-tools').hydstra;
 var config = require('./config');
 var webservices = config.services;
 var getMastdict = JSON.stringify(hydstraTools.queries.mastdict);
-
-
 
 for (var i = webservices.length - 1; i >= 0; i--) {
 
@@ -52,7 +70,7 @@ for (var i = webservices.length - 1; i >= 0; i--) {
       URIoptions = {'pool':false,'keepAlive':true,'uri':uri};
   }
   else{
-      URIoptions = 'http://' + options.host + options.path +'?'+ getSitesArray;
+      URIoptions = 'http://' + options.host + options.path + getMastdict;
   }
   
   reqDomain.on('error', function(err) {
@@ -66,7 +84,11 @@ for (var i = webservices.length - 1; i >= 0; i--) {
       .pipe(split2())
       .pipe(hydstraTools.cleanReturn())
       .pipe(hydstraTools.generateMetaSchema())
+      // .pipe(hydstraTools.loginToGFC())
       .pipe(hydstraTools.createSchema())
+      // .pipe(hydstraTools.loginToCompanyTable())
+      // .pipe(hydstraTools.createTableSchemaAssociation()) // this will return the schema _id for a company-table 
+      // .pipe(hydstraTools.createSchema())
       //.pipe(fs.createWriteStream(mastdictFile))
 
       

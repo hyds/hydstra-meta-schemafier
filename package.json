@@ -29,6 +29,8 @@
   "dependencies": {
     "bunyan": "^1.3.5",
     "hds-tools": "^1.0.12",
+    "leveldown": "^1.2.2",
+    "levelup": "^1.2.0",
     "request": "^2.53.0",
     "split": "^0.3.3",
     "split2": "^0.2.1",
